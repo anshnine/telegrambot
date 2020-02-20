@@ -1,14 +1,15 @@
 <?php
 
+// отображение ошибок
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-function debug($var)
+// дебаг в лог файл
+function debug($object)
 {
-    echo "<pre>";
-    file_put_contents("var/logs/debug.log", print_r($var, true));
-    echo "</pre>";
-
-
+    ob_start();
+    print_r($object);
+    $contents = ob_get_contents();
+    ob_end_clean();
+    error_log($contents, 3, "./var/logs/debug.log");
 }
-

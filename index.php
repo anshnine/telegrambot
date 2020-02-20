@@ -3,7 +3,7 @@
 require "application/lib/dev.php";
 
 use application\core\Router;
-use application\lib\Db;
+
 
 // автозагрузка класса роутер
 spl_autoload_register(function ($class) {
@@ -12,5 +12,6 @@ spl_autoload_register(function ($class) {
         require $path;
     }
 });
-
+$router = new Router();
+$router->run();
 session_start();
