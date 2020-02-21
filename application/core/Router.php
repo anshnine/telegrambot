@@ -8,6 +8,7 @@ class Router
     protected $routes = [];
     protected $params = [];
 
+    // функция автоматически выполняющаяся при вызове класса
     function __construct()
     {
         $array = require "application/config/routes.php";
@@ -15,7 +16,6 @@ class Router
         foreach ($array as $item => $value) {
             $this->addRoute($item, $value);
         }
-
     }
 
     // добавление маршрута
@@ -35,11 +35,10 @@ class Router
                 $this->params = $params;
                 return true;
             }
-
         }
         return false;
-
     }
+
 
     public function run()
     {
@@ -47,21 +46,26 @@ class Router
 
             $path = "application\controllers\\" . ucfirst($this->params["controller"]) . "Controller";
 
+            // проверка на существование класса
             if (class_exists($path)) {
+
                 $action = $this->params["action"] . "Action";
+
+                // проверка на существование метода
                 if (method_exists($path, $action)) {
-                    $controller = new $path($this->params );
+
+                    $controller = new $path($this->params);
                     $controller->$action();
 
                 } else {
-                    echo "action " . $action . "not found";
+                   View::errorCode(404);
                 }
             } else {
-                echo "class " . $path . " not found";
+                View::errorCode(404);
             }
         } else {
 
-            echo "route not found";
+            View::errorCode(404);
         }
     }
 

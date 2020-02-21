@@ -10,7 +10,6 @@ class MessageController extends Controller
     // метод входа
     public function getMessageAction()
     {
-        echo "chat";
     }
 
 
