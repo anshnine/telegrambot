@@ -10,6 +10,10 @@ class AuthController extends Controller
     // метод входа
     public function loginAction()
     {
+        if (!empty($_POST)) {
+
+            $this->view->message("error", "error");
+        }
         $this->view->render("Вход");
     }
 

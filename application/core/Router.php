@@ -58,7 +58,7 @@ class Router
                     $controller->$action();
 
                 } else {
-                   View::errorCode(404);
+                    View::errorCode(404);
                 }
             } else {
                 View::errorCode(404);
